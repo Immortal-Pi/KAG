@@ -1,1 +1,7 @@
 .env 
+graphragvenv
+input
+output
+prompts
+cache
+logs
