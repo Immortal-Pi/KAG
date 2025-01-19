@@ -12,7 +12,7 @@ llm:
   model: gpt-4
   model_supports_json: true # recommended if this is available for your model.
   # audience: "https://cognitiveservices.azure.com/.default"
-  api_base: https://kag.openai.azure.com/
+  api_base: https://llmops-amruth.openai.azure.com/
   api_version: 2024-08-01-preview
   # organization: <organization_id>
   deployment_name: gpt-4
@@ -34,8 +34,8 @@ embeddings:
     api_key: ${GRAPHRAG_API_KEY}
     type: azure_openai_embedding # or azure_openai_embedding
     model: text-embedding-3-small
-    api_base: https://kag.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15
-    api_version: '2023-05-15'
+    api_base: https://llmops-amruth.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15
+    api_version: 2024-08-01-preview
     # audience: "https://cognitiveservices.azure.com/.default"
     # organization: <organization_id>
     deployment_name: text-embedding-3-small
@@ -50,8 +50,8 @@ input:
   file_pattern: ".*\\.txt$"
 
 chunks:
-  size: 1000
-  overlap: 100
+  size: 500
+  overlap: 150
   group_by_columns: [id]
 
 ### Storage settings ###
@@ -64,7 +64,7 @@ cache:
 
 reporting:
   type: file # or console, blob
-  base_dir: "logs"
+  base_dir: "output/${timestamp}/reports"
 
 storage:
   type: file # one of [blob, cosmosdb, file]
@@ -82,7 +82,7 @@ skip_workflows: []
 
 entity_extraction:
   prompt: "prompts/entity_extraction.txt"
-  entity_types: [organization,person,geo,events,company,technoology]
+  entity_types: [organization,person,geo,event, product, technology,place, occasion, occupation, industry, ]
   max_gleanings: 0
 
 summarize_descriptions:
