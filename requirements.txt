@@ -6,3 +6,6 @@ neo4j
 beautifulsoup4 
 langgraph
 langchain-experimental 
+langsmith 
+arxiv
+wikipedia
