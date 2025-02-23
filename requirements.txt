@@ -4,3 +4,5 @@ langchain-community
 langchain-openai
 neo4j 
 beautifulsoup4 
+langgraph
+langchain-experimental 
