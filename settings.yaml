@@ -15,7 +15,7 @@ llm:
   api_base: https://llmops-amruth.openai.azure.com/
   api_version: 2024-08-01-preview
   # organization: <organization_id>
-  deployment_name: gpt-4
+  deployment_name: gpt-4o
 
 parallelization:
   stagger: 0.3
@@ -31,7 +31,7 @@ embeddings:
     container_name: default
     overwrite: true
   llm:
-    api_key: ${GRAPHRAG_API_KEY}
+    api_key: ${OPENAI_API_KEY_3}
     type: azure_openai_embedding # or azure_openai_embedding
     model: text-embedding-3-small
     api_base: https://llmops-amruth.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15
@@ -50,8 +50,8 @@ input:
   file_pattern: ".*\\.txt$"
 
 chunks:
-  size: 1000
-  overlap: 300
+  size: 300
+  overlap: 100
   group_by_columns: [id]
 
 ### Storage settings ###
