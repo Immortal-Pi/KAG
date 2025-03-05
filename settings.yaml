@@ -7,7 +7,7 @@
 encoding_model: cl100k_base # this needs to be matched to your model!
 
 llm:
-  api_key: ${GRAPHRAG_API_KEY} # set this in the generated .env file
+  api_key: ${OPENAI_API_KEY_3} # set this in the generated .env file
   type: azure_openai_chat # or azure_openai_chat
   model: gpt-4
   model_supports_json: true # recommended if this is available for your model.
@@ -50,8 +50,8 @@ input:
   file_pattern: ".*\\.txt$"
 
 chunks:
-  size: 300
-  overlap: 100
+  size: 1000
+  overlap: 300
   group_by_columns: [id]
 
 ### Storage settings ###
