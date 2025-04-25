@@ -13,6 +13,7 @@ import asyncio
 
 
 neo4j_driver=neo4j.GraphDatabase.driver(os.getenv('NEO4J_URI_ONLINE'),auth=(os.getenv('NEO4J_USERNAME_ONLINE'),os.getenv('NEO4J_PASSWORD_ONLINE')))
+
 llm=AzureOpenAILLM(
     model_name=os.getenv('AZURE_OPENAI_DEPLOYMENT_MODEL_2'),
     azure_endpoint=os.getenv('AZURE_OpenAI_ENDPOINT_2'),

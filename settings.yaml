@@ -7,13 +7,13 @@
 encoding_model: cl100k_base # this needs to be matched to your model!
 
 llm:
-  api_key: ${OPENAI_API_KEY_3} # set this in the generated .env file
+  api_key: ${AZURE_OPENAI_API_KEY_3} # set this in the generated .env file
   type: azure_openai_chat # or azure_openai_chat
-  model: gpt-4
+  model: gpt-4o
   model_supports_json: true # recommended if this is available for your model.
   # audience: "https://cognitiveservices.azure.com/.default"
   api_base: https://llmops-amruth.openai.azure.com/
-  api_version: 2024-08-01-preview
+  api_version: 2024-12-01-preview
   # organization: <organization_id>
   deployment_name: gpt-4o
 
@@ -31,11 +31,11 @@ embeddings:
     container_name: default
     overwrite: true
   llm:
-    api_key: ${OPENAI_API_KEY_3}
+    api_key: ${AZURE_OPENAI_API_KEY_3}
     type: azure_openai_embedding # or azure_openai_embedding
     model: text-embedding-3-small
-    api_base: https://llmops-amruth.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2023-05-15
-    api_version: 2024-08-01-preview
+    api_base: https://llmops-amruth.openai.azure.com/
+    api_version: 2024-12-01-preview
     # audience: "https://cognitiveservices.azure.com/.default"
     # organization: <organization_id>
     deployment_name: text-embedding-3-small
@@ -50,8 +50,8 @@ input:
   file_pattern: ".*\\.txt$"
 
 chunks:
-  size: 1000
-  overlap: 300
+  size: 500
+  overlap: 100
   group_by_columns: [id]
 
 ### Storage settings ###
