@@ -7,19 +7,27 @@
 encoding_model: cl100k_base # this needs to be matched to your model!
 
 llm:
-  api_key: ${AZURE_OPENAI_API_KEY_3} # set this in the generated .env file
+  api_key: ${AZURE_OPENAI_API_KEY_2} # set this in the generated .env file
   type: azure_openai_chat # or azure_openai_chat
-  model: gpt-4o
+  model: gpt-35-turbo
+  request_timeout: 60
   model_supports_json: true # recommended if this is available for your model.
   # audience: "https://cognitiveservices.azure.com/.default"
   api_base: https://llmops-amruth.openai.azure.com/
   api_version: 2024-12-01-preview
   # organization: <organization_id>
-  deployment_name: gpt-4o
+  deployment_name: gpt-35-turbo
+  tokens_per_minute: 60000 # set a leaky bucket throttle
+  requests_per_minute: 160 # set a leaky bucket throttle
+  retry_delay_seconds: 2
+  max_retries: 100
+  max_retry_wait: 10.0
+  concurrent_requests: 5 
+  max_tokens_per_request: 4000
 
 parallelization:
-  stagger: 0.3
-  # num_threads: 50
+  stagger: 2.5
+  num_threads: 2
 
 async_mode: threaded # or asyncio
 
@@ -31,14 +39,21 @@ embeddings:
     container_name: default
     overwrite: true
   llm:
-    api_key: ${AZURE_OPENAI_API_KEY_3}
+    api_key: ${AZURE_OPENAI_API_KEY_2}
     type: azure_openai_embedding # or azure_openai_embedding
-    model: text-embedding-3-small
+    model: text-embedding-3-large
     api_base: https://llmops-amruth.openai.azure.com/
     api_version: 2024-12-01-preview
     # audience: "https://cognitiveservices.azure.com/.default"
     # organization: <organization_id>
-    deployment_name: text-embedding-3-small
+    deployment_name: text-embedding-3-large
+    tokens_per_minute: 60000 # set a leaky bucket throttle
+    requests_per_minute: 160 # set a leaky bucket throttle
+    retry_delay_seconds: 2
+    max_retries: 100
+    max_retry_wait: 10.0
+    concurrent_requests: 5 
+    max_tokens_per_request: 4000
 
 ### Input settings ###
 
@@ -50,8 +65,8 @@ input:
   file_pattern: ".*\\.txt$"
 
 chunks:
-  size: 500
-  overlap: 100
+  size: 1500
+  overlap: 250
   group_by_columns: [id]
 
 ### Storage settings ###
@@ -82,12 +97,12 @@ skip_workflows: []
 
 entity_extraction:
   prompt: "prompts/entity_extraction.txt"
-  entity_types: [organization,person,geo,event, product, technology,place, occasion, occupation, industry, ]
+  entity_types: [organization, geo, event, place, occasion, occupation, person, company, startup, investor, venturecapitalfirm, fundinground, acquisition, merger, product, service, market, industry, technology, publication, patent, conference, researchpaper, ipo, equity, grant, debtfinancing, angelinvestment]
   max_gleanings: 0
 
 summarize_descriptions:
   prompt: "prompts/summarize_descriptions.txt"
-  max_length: 500
+  max_length: 1000
 
 claim_extraction:
   enabled: false
@@ -97,11 +112,11 @@ claim_extraction:
 
 community_reports:
   prompt: "prompts/community_report.txt"
-  max_length: 2000
-  max_input_length: 8000
+  max_length: 0
+  max_input_length: 0
 
 cluster_graph:
-  max_cluster_size: 20
+  max_cluster_size: 10
 
 embed_graph:
   enabled: false # if true, will generate node2vec embeddings for nodes

@@ -24,7 +24,8 @@ import pandas as pd
 from typing import Dict, TypedDict, Optional
 from langgraph.graph import StateGraph, END 
 import subprocess
-
+from pathlib import Path 
+project_root=Path('D:/pythonProjects/KAG_Testing')
 
 
 # neo4j 
@@ -155,10 +156,10 @@ qachain=workflow.compile()
 
 st.set_page_config(page_title="Multi- Response Viewer", layout="wide")
 
-st.title("💬 Graph RAG - question")
+st.title("KnowGraph Lab")
 
 # User question input at the top
-user_question = st.text_input("Type your question here:", placeholder="e.g., How does AI affect healthcare?")
+user_question = st.text_input("Type your question here:", placeholder="e.g., who is Jeff Bezos")
 
 # Only show responses if a question is entered
 if user_question:
@@ -205,29 +206,42 @@ if user_question:
 
         # st.write("Response from Model A based on the question:")
         # st.success(f"🔹 This is a simulated response to: '{user_question}'")
-        st.write(f"{vc_rag.search(user_question,retriever_config={'top_k':10}).answer}")
+        st.write(f"{vc_rag.search(user_question,retriever_config={'top_k':3}).answer}")
 
 
     with col2:
         st.subheader("Microsoft-GraphRAG")
-        # st.write("Response from Model B based on the question:")
-        # st.info(f"🔸 Another perspective on: '{user_question}'")
         try:
-            result=subprocess.run(
-                ["python", "-m", "graphrag", "query", "--root", ".", "--method", "global", "--query", user_question],
-                capture_output=True,
-                text=True
+            command = [
+                "python", "-m", "graphrag", "query",
+                "--root", ".", "--method", "global",
+                "--query", user_question
+            ]
+
+            result = subprocess.run(
+                command,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True,
+                check=True  # Raises CalledProcessError if the command fails
             )
-            if result.returncode == 0:
-                # st.success("Query completed successfully!")
-                # st.markdown("### Output")
-                st.code(str(result.stdout))
+
+            print("✅ STDOUT:\n", result.stdout)
+            print("ℹ️ STDERR:\n", result.stderr)
+
+            # Store for further use
+            output_text = result.stdout
+            error_text = result.stderr
+            if "SUCCESS: Global Search Response:" in output_text:
+                llm_response = output_text.split("SUCCESS: Global Search Response:")[-1].strip()
             else:
-                st.error("An error occurred.")
-                st.code(result.stderr)
+                llm_response = "No LLM response found."
+
+            st.write(llm_response)
 
         except Exception as e:
-            st.error(f"Exception occurred: {e}")
+            print("⚠️ An unexpected error occurred.")
+            print(str(e))
 
     with col3:
         st.subheader("GraphQAChain")
