@@ -1,10 +1,14 @@
-# 🌐 Network Visualization with Neo4j, Gephi, and Large Language Models (LLMs)
 
-## 🧮 About This Repository
+# Network Visualization with Neo4j, Gephi, and Large Language Models (LLMs)
 
-This repository compares multiple **Retrieval-Augmented Generation (RAG)** approaches that leverage **graph databases** for contextual reasoning and knowledge retrieval.
+This repository helps create graph network using LLMs and use it for RAG approaches using graph databasese for contextual reasoning and knowledge retrieval 
 
-### 🔍 Compared Frameworks
+## Architecture
+
+## UI
+
+## compared Frameworks:
+
 | Framework | Backend / Architecture | Description |
 |------------|------------------------|--------------|
 | **Neo4JGraphRAG** | Neo4j + LangChain/LLM | Uses Neo4j as the graph database to represent entities and relationships; integrates with an LLM for context-aware retrieval. |
@@ -13,9 +17,8 @@ This repository compares multiple **Retrieval-Augmented Generation (RAG)** appro
 
 Each approach was tested in the **KnowGraph Lab** prototype (shown below), allowing natural language queries and side-by-side comparison of RAG responses.
 
----
 
-## 🧠 KnowGraph Lab Interface
+## KnowGraph Lab Interface
 
 Below is a snapshot of the **KnowGraph Lab**, the interactive interface built for this comparison:
 
@@ -31,18 +34,15 @@ Below is a snapshot of the **KnowGraph Lab**, the interactive interface built fo
 
 This interface allows direct visualization and interpretation of how each RAG system reasons, fetches, and composes answers.
 
----
-![KnowGraph Lab UI](screenshots/RAG response 5 .png)
-![KnowGraph Lab UI](screenshots/RAG response 5 .png)
-![KnowGraph Lab UI](screenshots/RAG response 5 .png)
-## 🧩 Core Focus
+### example screenshots and graphs 
+
+## Core Focus
 
 - Compare **Graph-based Retrieval Architectures**
 - Evaluate **Contextual Reasoning Quality**
 - Assess **Query Latency and Interpretability**
 - Explore **LLM-assisted Graph Traversal**
 
----
 
 ## 📰 Read the Full Article
 
