@@ -3,9 +3,11 @@
 
 This repository helps create graph network using LLMs and use it for RAG approaches using graph databasese for contextual reasoning and knowledge retrieval 
 
-## Architecture
+## Microsoft GraphRag - gephi visualization
+![Microsoft](https://github.com/Immortal-Pi/KAG/blob/main/screenshots/MicrosoftGR2.png)
 
-## UI
+## neo4j GraphDB
+![neo](https://github.com/Immortal-Pi/KAG/blob/main/screenshots/neo4j.png)
 
 ## compared Frameworks:
 
@@ -22,7 +24,7 @@ Each approach was tested in the **KnowGraph Lab** prototype (shown below), allow
 
 Below is a snapshot of the **KnowGraph Lab**, the interactive interface built for this comparison:
 
-![KnowGraph Lab UI](screenshots/RAG response 5 .png)
+![KnowGraph Lab UI](https://github.com/Immortal-Pi/KAG/blob/main/screenshots/RAG%20response%205%20.png)
 
 **Example Query:**  
 > *"Give me a list of people related to CNN"*
@@ -35,7 +37,8 @@ Below is a snapshot of the **KnowGraph Lab**, the interactive interface built fo
 This interface allows direct visualization and interpretation of how each RAG system reasons, fetches, and composes answers.
 
 ### example screenshots and graphs 
-
+![](https://github.com/Immortal-Pi/KAG/blob/main/screenshots/RAG%20response%205_MG.png)
+![](https://github.com/Immortal-Pi/KAG/blob/main/screenshots/RAG%20response%205_N4J.png)
 ## Core Focus
 
 - Compare **Graph-based Retrieval Architectures**
